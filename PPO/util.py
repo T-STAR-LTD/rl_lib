@@ -6,7 +6,7 @@ from collections import deque
 from PPO import PPO
 from Config import Config
 import pdb
-import wandb
+# import wandb
 from envs import make_atari_env, make_env, VecPyTorch
 from stable_baselines3.common.vec_env import DummyVecEnv
 
@@ -24,6 +24,16 @@ def train(config, envs):
   
   if config.wandb:
     wandb.watch(agent.model)
+
+  print("lr",config.lr)
+  print("n_steps",config.n_steps)
+  print("lr_annealing",config.lr_annealing)
+  print("gae",config.gae)
+  print("epsilon_annealing",config.epsilon_annealing)
+  print("gamma",config.gamma)
+  print("epsilon",config.epsilon)
+  print("entropy_beta",config.entropy_beta)
+  print("mini_batch_size",config.mini_batch_size)
 
   while global_step < config.n_steps:
 
@@ -76,6 +86,6 @@ def train(config, envs):
         "learning_rate": lr_now
        })
 
-    print("Global Step: {}	Average Score: {:.2f}".format(global_step, np.mean(scores_deque)))   
+    print("Global Step: {}	Average Score: {:.2f}  Ent.: {:.5f}".format(global_step, np.mean(scores_deque), approx_entropy.item()))   
 
   return scores, average_scores
