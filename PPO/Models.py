@@ -102,7 +102,7 @@ class ActorCriticCnn(nn.Module):
     return self.network(x)
 
   def act(self, x, action=None):
-    pdb.set_trace()
+    # pdb.set_trace()
     values = self.critic(self.forward(x))
     logits = self.actor(self.forward(x))
     probs = Categorical(logits=logits)

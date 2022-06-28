@@ -10,7 +10,7 @@ from stable_baselines3.common.vec_env import DummyVecEnv
 
 import matplotlib.pyplot as plt
 import numpy as np
-import pdb
+# import pdb
 
 
 def runProcGen():
@@ -69,7 +69,7 @@ def runGym():
   config.memory = Memory
   config.model = ActorCritic
 
-  config.init_wandb(project="gym", entity="procgen")
+  # config.init_wandb(project="gym", entity="procgen")
 
   scores, average_scores = train(config, config.env)
 
